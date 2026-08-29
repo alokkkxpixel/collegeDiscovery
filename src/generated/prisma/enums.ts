@@ -9,7 +9,11 @@
 * 🟢 You can import this file directly.
 */
 
+export const Exam = {
+  JEE: 'JEE',
+  NEET: 'NEET',
+  CET: 'CET',
+  CUET: 'CUET'
+} as const
 
-
-// This file is empty because there are no enums in the schema.
-export {}
+export type Exam = (typeof Exam)[keyof typeof Exam]

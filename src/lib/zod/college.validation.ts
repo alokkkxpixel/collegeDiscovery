@@ -1,4 +1,5 @@
 import z from "zod";
+import { Exam } from "../../generated/prisma/enums";
 
 
 
@@ -50,4 +51,28 @@ export const compareQuerySchema = z.object({
     .nullable()
     .refine((val) => !val || /^\d+$/.test(val), "limit must be a positive integer")
     .transform((val) => (val ? parseInt(val, 10) : 10)),
+});
+
+export const recommendationQuerySchema = z.object({
+  exam: z.nativeEnum(Exam, {
+    message: "Exam must be one of: JEE, NEET, CET, CUET",
+  }),
+  rank: z
+    .string()
+    .min(1, "rank query param is required")
+    .refine((val) => /^\d+$/.test(val), "rank must be a positive integer")
+    .transform((val) => parseInt(val, 10)),
+});
+
+export const createReviewSchema = z.object({
+  collegeId: z.string().min(1, "collegeId is required"),
+  rating: z
+    .number({ message: "rating is required" })
+    .int("rating must be an integer")
+    .min(1, "rating must be at least 1")
+    .max(5, "rating must be at most 5"),
+  comment: z
+    .string()
+    .min(3, "comment must be at least 3 characters")
+    .max(1000, "comment cannot exceed 1000 characters"),
 });

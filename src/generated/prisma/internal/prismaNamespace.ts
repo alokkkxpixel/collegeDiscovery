@@ -1001,6 +1001,8 @@ export const CourseScalarFieldEnum = {
   collegeId: 'collegeId',
   name: 'name',
   duration: 'duration',
+  exam: 'exam',
+  cutoffRank: 'cutoffRank',
   fees: 'fees',
   seats: 'seats'
 } as const
@@ -1146,6 +1148,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Exam'
+ */
+export type EnumExamFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Exam'>
+    
+
+
+/**
+ * Reference to a field of type 'Exam[]'
+ */
+export type ListEnumExamFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Exam[]'>
     
 
 /**

@@ -7,6 +7,7 @@
 // Swap in verified numbers if this goes beyond the assignment.
 
 import { prisma } from "../src/lib/prisma.client";
+import { Exam } from "../src/generated/prisma/enums";
 
 type SeedCollege = {
   name: string;
@@ -17,7 +18,7 @@ type SeedCollege = {
   fees: number; // total course fees (INR)
   rating: number;
   overview: string;
-  courses: { name: string; duration: string; fees: number; seats: number }[];
+  courses: { name: string; duration: string; fees: number; seats: number; exam?: Exam; cutoffRank?: number }[];
   placements: {
     year: number;
     avgPackage: number;
@@ -38,9 +39,9 @@ const colleges: SeedCollege[] = [
     overview:
       "Premier engineering institute known for strong research output, top-tier placements, and a highly competitive admission process via JEE Advanced.",
     courses: [
-      { name: "B.Tech Computer Science", duration: "4 years", fees: 900000, seats: 120 },
-      { name: "B.Tech Electrical Engineering", duration: "4 years", fees: 850000, seats: 100 },
-      { name: "B.Tech Mechanical Engineering", duration: "4 years", fees: 800000, seats: 110 },
+      { name: "B.Tech Computer Science", duration: "4 years", fees: 900000, seats: 120, exam: Exam.JEE, cutoffRank: 2000 },
+      { name: "B.Tech Electrical Engineering", duration: "4 years", fees: 850000, seats: 100, exam: Exam.JEE, cutoffRank: 4000 },
+      { name: "B.Tech Mechanical Engineering", duration: "4 years", fees: 800000, seats: 110, exam: Exam.JEE, cutoffRank: 6000 },
     ],
     placements: [
       { year: 2024, avgPackage: 2400000, highestPackage: 12000000, placementRate: 95 },
@@ -58,9 +59,9 @@ const colleges: SeedCollege[] = [
     overview:
       "Leading technical institute with strong industry ties, offering undergraduate and postgraduate programs across engineering disciplines.",
     courses: [
-      { name: "B.Tech Computer Science", duration: "4 years", fees: 880000, seats: 115 },
-      { name: "B.Tech Civil Engineering", duration: "4 years", fees: 780000, seats: 90 },
-      { name: "B.Tech Chemical Engineering", duration: "4 years", fees: 780000, seats: 80 },
+      { name: "B.Tech Computer Science", duration: "4 years", fees: 880000, seats: 115, exam: Exam.JEE, cutoffRank: 2500 },
+      { name: "B.Tech Civil Engineering", duration: "4 years", fees: 780000, seats: 90, exam: Exam.JEE, cutoffRank: 8000 },
+      { name: "B.Tech Chemical Engineering", duration: "4 years", fees: 780000, seats: 80, exam: Exam.JEE, cutoffRank: 7500 },
     ],
     placements: [
       { year: 2024, avgPackage: 2300000, highestPackage: 11000000, placementRate: 94 },
@@ -78,9 +79,9 @@ const colleges: SeedCollege[] = [
     overview:
       "Consistently ranked India's top engineering institute, with a strong focus on research, entrepreneurship, and industry collaboration.",
     courses: [
-      { name: "B.Tech Computer Science", duration: "4 years", fees: 870000, seats: 120 },
-      { name: "B.Tech Aerospace Engineering", duration: "4 years", fees: 800000, seats: 60 },
-      { name: "B.Tech Mechanical Engineering", duration: "4 years", fees: 800000, seats: 100 },
+      { name: "B.Tech Computer Science", duration: "4 years", fees: 870000, seats: 120, exam: Exam.JEE, cutoffRank: 3000 },
+      { name: "B.Tech Aerospace Engineering", duration: "4 years", fees: 800000, seats: 60, exam: Exam.JEE, cutoffRank: 5000 },
+      { name: "B.Tech Mechanical Engineering", duration: "4 years", fees: 800000, seats: 100, exam: Exam.JEE, cutoffRank: 6500 },
     ],
     placements: [
       { year: 2024, avgPackage: 2350000, highestPackage: 10500000, placementRate: 94 },
@@ -98,9 +99,9 @@ const colleges: SeedCollege[] = [
     overview:
       "Top private deemed university known for flexible curriculum, strong alumni network, and practice school (internship) program.",
     courses: [
-      { name: "B.E. Computer Science", duration: "4 years", fees: 1900000, seats: 180 },
-      { name: "B.E. Electronics & Communication", duration: "4 years", fees: 1850000, seats: 150 },
-      { name: "B.Pharm", duration: "4 years", fees: 1600000, seats: 80 },
+      { name: "B.E. Computer Science", duration: "4 years", fees: 1900000, seats: 180, exam: Exam.JEE, cutoffRank: 5000 },
+      { name: "B.E. Electronics & Communication", duration: "4 years", fees: 1850000, seats: 150, exam: Exam.JEE, cutoffRank: 7000 },
+      { name: "B.Pharm", duration: "4 years", fees: 1600000, seats: 80, exam: Exam.NEET, cutoffRank: 15000 },
     ],
     placements: [
       { year: 2024, avgPackage: 1900000, highestPackage: 6500000, placementRate: 92 },
@@ -118,9 +119,9 @@ const colleges: SeedCollege[] = [
     overview:
       "Large private university offering a wide range of engineering and technology programs with strong corporate placement drives.",
     courses: [
-      { name: "B.Tech Computer Science", duration: "4 years", fees: 800000, seats: 600 },
-      { name: "B.Tech Information Technology", duration: "4 years", fees: 780000, seats: 300 },
-      { name: "B.Tech Biotechnology", duration: "4 years", fees: 720000, seats: 120 },
+      { name: "B.Tech Computer Science", duration: "4 years", fees: 800000, seats: 600, exam: Exam.CET, cutoffRank: 15000 },
+      { name: "B.Tech Information Technology", duration: "4 years", fees: 780000, seats: 300, exam: Exam.CET, cutoffRank: 18000 },
+      { name: "B.Tech Biotechnology", duration: "4 years", fees: 720000, seats: 120, exam: Exam.NEET, cutoffRank: 25000 },
     ],
     placements: [
       { year: 2024, avgPackage: 850000, highestPackage: 4400000, placementRate: 85 },
@@ -138,9 +139,9 @@ const colleges: SeedCollege[] = [
     overview:
       "State-run technical university (formerly Delhi College of Engineering) known for strong academics at government fee levels.",
     courses: [
-      { name: "B.Tech Computer Science", duration: "4 years", fees: 560000, seats: 180 },
-      { name: "B.Tech Electrical Engineering", duration: "4 years", fees: 540000, seats: 150 },
-      { name: "B.Tech Mechanical Engineering", duration: "4 years", fees: 540000, seats: 140 },
+      { name: "B.Tech Computer Science", duration: "4 years", fees: 560000, seats: 180, exam: Exam.JEE, cutoffRank: 12000 },
+      { name: "B.Tech Electrical Engineering", duration: "4 years", fees: 540000, seats: 150, exam: Exam.JEE, cutoffRank: 22000 },
+      { name: "B.Tech Mechanical Engineering", duration: "4 years", fees: 540000, seats: 140, exam: Exam.JEE, cutoffRank: 25000 },
     ],
     placements: [
       { year: 2024, avgPackage: 1400000, highestPackage: 6000000, placementRate: 88 },
@@ -158,9 +159,9 @@ const colleges: SeedCollege[] = [
     overview:
       "Constituent institute of Manipal Academy of Higher Education, offering a broad range of engineering programs with active placement cells.",
     courses: [
-      { name: "B.Tech Computer Science", duration: "4 years", fees: 1750000, seats: 300 },
-      { name: "B.Tech Information Technology", duration: "4 years", fees: 1700000, seats: 180 },
-      { name: "B.Tech Mechanical Engineering", duration: "4 years", fees: 1600000, seats: 150 },
+      { name: "B.Tech Computer Science", duration: "4 years", fees: 1750000, seats: 300, exam: Exam.CET, cutoffRank: 10000 },
+      { name: "B.Tech Information Technology", duration: "4 years", fees: 1700000, seats: 180, exam: Exam.CET, cutoffRank: 12000 },
+      { name: "B.Tech Mechanical Engineering", duration: "4 years", fees: 1600000, seats: 150, exam: Exam.CET, cutoffRank: 18000 },
     ],
     placements: [
       { year: 2024, avgPackage: 900000, highestPackage: 4800000, placementRate: 82 },
@@ -178,9 +179,9 @@ const colleges: SeedCollege[] = [
     overview:
       "Large private deemed university with multiple campuses, offering diverse engineering, management, and health science programs.",
     courses: [
-      { name: "B.Tech Computer Science", duration: "4 years", fees: 950000, seats: 500 },
-      { name: "B.Tech Data Science", duration: "4 years", fees: 940000, seats: 180 },
-      { name: "B.Tech Civil Engineering", duration: "4 years", fees: 700000, seats: 120 },
+      { name: "B.Tech Computer Science", duration: "4 years", fees: 950000, seats: 500, exam: Exam.CET, cutoffRank: 20000 },
+      { name: "B.Tech Data Science", duration: "4 years", fees: 940000, seats: 180, exam: Exam.CET, cutoffRank: 22000 },
+      { name: "B.Tech Civil Engineering", duration: "4 years", fees: 700000, seats: 120, exam: Exam.CET, cutoffRank: 35000 },
     ],
     placements: [
       { year: 2024, avgPackage: 720000, highestPackage: 4100000, placementRate: 78 },
@@ -198,9 +199,9 @@ const colleges: SeedCollege[] = [
     overview:
       "One of India's top NITs, known for strong core engineering programs and consistent placement performance.",
     courses: [
-      { name: "B.Tech Computer Science", duration: "4 years", fees: 620000, seats: 130 },
-      { name: "B.Tech Electronics & Communication", duration: "4 years", fees: 600000, seats: 120 },
-      { name: "B.Tech Mechanical Engineering", duration: "4 years", fees: 590000, seats: 110 },
+      { name: "B.Tech Computer Science", duration: "4 years", fees: 620000, seats: 130, exam: Exam.JEE, cutoffRank: 8000 },
+      { name: "B.Tech Electronics & Communication", duration: "4 years", fees: 600000, seats: 120, exam: Exam.JEE, cutoffRank: 10000 },
+      { name: "B.Tech Mechanical Engineering", duration: "4 years", fees: 590000, seats: 110, exam: Exam.JEE, cutoffRank: 15000 },
     ],
     placements: [
       { year: 2024, avgPackage: 1500000, highestPackage: 5800000, placementRate: 90 },
@@ -218,9 +219,9 @@ const colleges: SeedCollege[] = [
     overview:
       "Top-ranked NIT with a scenic coastal campus, strong in computer science, electronics, and civil engineering programs.",
     courses: [
-      { name: "B.Tech Computer Science", duration: "4 years", fees: 630000, seats: 130 },
-      { name: "B.Tech Information Technology", duration: "4 years", fees: 610000, seats: 100 },
-      { name: "B.Tech Civil Engineering", duration: "4 years", fees: 580000, seats: 100 },
+      { name: "B.Tech Computer Science", duration: "4 years", fees: 630000, seats: 130, exam: Exam.JEE, cutoffRank: 9000 },
+      { name: "B.Tech Information Technology", duration: "4 years", fees: 610000, seats: 100, exam: Exam.JEE, cutoffRank: 11000 },
+      { name: "B.Tech Civil Engineering", duration: "4 years", fees: 580000, seats: 100, exam: Exam.JEE, cutoffRank: 22000 },
     ],
     placements: [
       { year: 2024, avgPackage: 1450000, highestPackage: 5600000, placementRate: 89 },
@@ -238,9 +239,9 @@ const colleges: SeedCollege[] = [
     overview:
       "Renowned state university offering highly subsidized, quality engineering and arts education with a strong legacy.",
     courses: [
-      { name: "B.E. Computer Science", duration: "4 years", fees: 150000, seats: 90 },
-      { name: "B.E. Electrical Engineering", duration: "4 years", fees: 145000, seats: 80 },
-      { name: "B.E. Metallurgical Engineering", duration: "4 years", fees: 140000, seats: 40 },
+      { name: "B.E. Computer Science", duration: "4 years", fees: 150000, seats: 90, exam: Exam.CET, cutoffRank: 5000 },
+      { name: "B.E. Electrical Engineering", duration: "4 years", fees: 145000, seats: 80, exam: Exam.CET, cutoffRank: 8000 },
+      { name: "B.E. Metallurgical Engineering", duration: "4 years", fees: 140000, seats: 40, exam: Exam.CET, cutoffRank: 12000 },
     ],
     placements: [
       { year: 2024, avgPackage: 1200000, highestPackage: 4800000, placementRate: 85 },
@@ -258,9 +259,9 @@ const colleges: SeedCollege[] = [
     overview:
       "One of India's oldest engineering colleges, now an autonomous state-run institute known for strong core engineering programs.",
     courses: [
-      { name: "B.Tech Computer Engineering", duration: "4 years", fees: 180000, seats: 120 },
-      { name: "B.Tech Mechanical Engineering", duration: "4 years", fees: 170000, seats: 100 },
-      { name: "B.Tech Civil Engineering", duration: "4 years", fees: 165000, seats: 90 },
+      { name: "B.Tech Computer Engineering", duration: "4 years", fees: 180000, seats: 120, exam: Exam.CET, cutoffRank: 6000 },
+      { name: "B.Tech Mechanical Engineering", duration: "4 years", fees: 170000, seats: 100, exam: Exam.CET, cutoffRank: 12000 },
+      { name: "B.Tech Civil Engineering", duration: "4 years", fees: 165000, seats: 90, exam: Exam.CET, cutoffRank: 15000 },
     ],
     placements: [
       { year: 2024, avgPackage: 1050000, highestPackage: 4200000, placementRate: 84 },
@@ -278,9 +279,9 @@ const colleges: SeedCollege[] = [
     overview:
       "Autonomous engineering college with strong industry linkages and a reputation for consistent academic and placement performance.",
     courses: [
-      { name: "B.E. Computer Science", duration: "4 years", fees: 400000, seats: 120 },
-      { name: "B.E. Electronics & Communication", duration: "4 years", fees: 380000, seats: 100 },
-      { name: "B.E. Textile Technology", duration: "4 years", fees: 320000, seats: 60 },
+      { name: "B.E. Computer Science", duration: "4 years", fees: 400000, seats: 120, exam: Exam.CET, cutoffRank: 8000 },
+      { name: "B.E. Electronics & Communication", duration: "4 years", fees: 380000, seats: 100, exam: Exam.CET, cutoffRank: 10000 },
+      { name: "B.E. Textile Technology", duration: "4 years", fees: 320000, seats: 60, exam: Exam.CET, cutoffRank: 25000 },
     ],
     placements: [
       { year: 2024, avgPackage: 780000, highestPackage: 3600000, placementRate: 86 },
@@ -298,9 +299,9 @@ const colleges: SeedCollege[] = [
     overview:
       "Top autonomous engineering college in Bengaluru with strong recruiter relationships in the local IT industry.",
     courses: [
-      { name: "B.E. Computer Science", duration: "4 years", fees: 550000, seats: 180 },
-      { name: "B.E. Information Science", duration: "4 years", fees: 540000, seats: 120 },
-      { name: "B.E. Electronics & Communication", duration: "4 years", fees: 520000, seats: 120 },
+      { name: "B.E. Computer Science", duration: "4 years", fees: 550000, seats: 180, exam: Exam.CET, cutoffRank: 8000 },
+      { name: "B.E. Information Science", duration: "4 years", fees: 540000, seats: 120, exam: Exam.CET, cutoffRank: 10000 },
+      { name: "B.E. Electronics & Communication", duration: "4 years", fees: 520000, seats: 120, exam: Exam.CET, cutoffRank: 12000 },
     ],
     placements: [
       { year: 2024, avgPackage: 950000, highestPackage: 4500000, placementRate: 87 },
@@ -318,9 +319,9 @@ const colleges: SeedCollege[] = [
     overview:
       "One of India's oldest private engineering colleges, autonomous, with a strong reputation in Karnataka for placements.",
     courses: [
-      { name: "B.E. Computer Science", duration: "4 years", fees: 530000, seats: 150 },
-      { name: "B.E. Mechanical Engineering", duration: "4 years", fees: 500000, seats: 100 },
-      { name: "B.E. Civil Engineering", duration: "4 years", fees: 480000, seats: 80 },
+      { name: "B.E. Computer Science", duration: "4 years", fees: 530000, seats: 150, exam: Exam.CET, cutoffRank: 10000 },
+      { name: "B.E. Mechanical Engineering", duration: "4 years", fees: 500000, seats: 100, exam: Exam.CET, cutoffRank: 16000 },
+      { name: "B.E. Civil Engineering", duration: "4 years", fees: 480000, seats: 80, exam: Exam.CET, cutoffRank: 18000 },
     ],
     placements: [
       { year: 2024, avgPackage: 920000, highestPackage: 4300000, placementRate: 86 },
@@ -338,9 +339,9 @@ const colleges: SeedCollege[] = [
     overview:
       "Leading private deemed university in North India, known for engineering and applied sciences programs.",
     courses: [
-      { name: "B.E. Computer Science", duration: "4 years", fees: 1100000, seats: 240 },
-      { name: "B.E. Electronics & Communication", duration: "4 years", fees: 1050000, seats: 150 },
-      { name: "B.E. Chemical Engineering", duration: "4 years", fees: 950000, seats: 80 },
+      { name: "B.E. Computer Science", duration: "4 years", fees: 1100000, seats: 240, exam: Exam.JEE, cutoffRank: 25000 },
+      { name: "B.E. Electronics & Communication", duration: "4 years", fees: 1050000, seats: 150, exam: Exam.JEE, cutoffRank: 35000 },
+      { name: "B.E. Chemical Engineering", duration: "4 years", fees: 950000, seats: 80, exam: Exam.JEE, cutoffRank: 45000 },
     ],
     placements: [
       { year: 2024, avgPackage: 880000, highestPackage: 4400000, placementRate: 83 },
@@ -358,9 +359,9 @@ const colleges: SeedCollege[] = [
     overview:
       "Deemed university with a scenic campus, offering engineering, management, and health science programs with active research centers.",
     courses: [
-      { name: "B.Tech Computer Science", duration: "4 years", fees: 950000, seats: 240 },
-      { name: "B.Tech Electronics & Communication", duration: "4 years", fees: 900000, seats: 150 },
-      { name: "B.Tech Mechanical Engineering", duration: "4 years", fees: 850000, seats: 100 },
+      { name: "B.Tech Computer Science", duration: "4 years", fees: 950000, seats: 240, exam: Exam.CET, cutoffRank: 18000 },
+      { name: "B.Tech Electronics & Communication", duration: "4 years", fees: 900000, seats: 150, exam: Exam.CET, cutoffRank: 22000 },
+      { name: "B.Tech Mechanical Engineering", duration: "4 years", fees: 850000, seats: 100, exam: Exam.CET, cutoffRank: 30000 },
     ],
     placements: [
       { year: 2024, avgPackage: 780000, highestPackage: 4000000, placementRate: 82 },
@@ -378,9 +379,9 @@ const colleges: SeedCollege[] = [
     overview:
       "Newer-generation IIT known for a research-focused, interdisciplinary curriculum and rapidly growing placement outcomes.",
     courses: [
-      { name: "B.Tech Computer Science", duration: "4 years", fees: 850000, seats: 100 },
-      { name: "B.Tech Artificial Intelligence", duration: "4 years", fees: 850000, seats: 60 },
-      { name: "B.Tech Mechanical Engineering", duration: "4 years", fees: 800000, seats: 80 },
+      { name: "B.Tech Computer Science", duration: "4 years", fees: 850000, seats: 100, exam: Exam.JEE, cutoffRank: 4000 },
+      { name: "B.Tech Artificial Intelligence", duration: "4 years", fees: 850000, seats: 60, exam: Exam.JEE, cutoffRank: 3500 },
+      { name: "B.Tech Mechanical Engineering", duration: "4 years", fees: 800000, seats: 80, exam: Exam.JEE, cutoffRank: 7000 },
     ],
     placements: [
       { year: 2024, avgPackage: 2000000, highestPackage: 8500000, placementRate: 92 },
@@ -398,9 +399,9 @@ const colleges: SeedCollege[] = [
     overview:
       "State-run technical university in Delhi with strong computer science and electronics programs, popular among Delhi-NCR students.",
     courses: [
-      { name: "B.Tech Computer Science", duration: "4 years", fees: 570000, seats: 130 },
-      { name: "B.Tech Information Technology", duration: "4 years", fees: 550000, seats: 100 },
-      { name: "B.Tech Electronics Engineering", duration: "4 years", fees: 540000, seats: 100 },
+      { name: "B.Tech Computer Science", duration: "4 years", fees: 570000, seats: 130, exam: Exam.JEE, cutoffRank: 14000 },
+      { name: "B.Tech Information Technology", duration: "4 years", fees: 550000, seats: 100, exam: Exam.JEE, cutoffRank: 16000 },
+      { name: "B.Tech Electronics Engineering", duration: "4 years", fees: 540000, seats: 100, exam: Exam.JEE, cutoffRank: 20000 },
     ],
     placements: [
       { year: 2024, avgPackage: 1350000, highestPackage: 5500000, placementRate: 88 },
@@ -418,9 +419,9 @@ const colleges: SeedCollege[] = [
     overview:
       "Well-known deemed university offering a mix of engineering, management, and liberal arts programs with a strong campus culture.",
     courses: [
-      { name: "B.Tech Computer Science", duration: "4 years", fees: 350000, seats: 120 },
-      { name: "BCA", duration: "3 years", fees: 240000, seats: 150 },
-      { name: "B.Tech Artificial Intelligence & Machine Learning", duration: "4 years", fees: 360000, seats: 80 },
+      { name: "B.Tech Computer Science", duration: "4 years", fees: 350000, seats: 120, exam: Exam.CET, cutoffRank: 15000 },
+      { name: "BCA", duration: "3 years", fees: 240000, seats: 150, exam: Exam.CUET, cutoffRank: 1000 },
+      { name: "B.Tech Artificial Intelligence & Machine Learning", duration: "4 years", fees: 360000, seats: 80, exam: Exam.CET, cutoffRank: 16000 },
     ],
     placements: [
       { year: 2024, avgPackage: 650000, highestPackage: 2800000, placementRate: 78 },
@@ -438,9 +439,9 @@ const colleges: SeedCollege[] = [
     overview:
       "One of India's largest private universities by enrollment, offering a very wide range of programs and large-scale placement drives.",
     courses: [
-      { name: "B.Tech Computer Science", duration: "4 years", fees: 720000, seats: 800 },
-      { name: "B.Tech Information Technology", duration: "4 years", fees: 700000, seats: 300 },
-      { name: "BBA", duration: "3 years", fees: 360000, seats: 400 },
+      { name: "B.Tech Computer Science", duration: "4 years", fees: 720000, seats: 800, exam: Exam.CET, cutoffRank: 50000 },
+      { name: "B.Tech Information Technology", duration: "4 years", fees: 700000, seats: 300, exam: Exam.CET, cutoffRank: 55000 },
+      { name: "BBA", duration: "3 years", fees: 360000, seats: 400, exam: Exam.CUET, cutoffRank: 5000 },
     ],
     placements: [
       { year: 2024, avgPackage: 550000, highestPackage: 3800000, placementRate: 75 },
@@ -452,11 +453,18 @@ const colleges: SeedCollege[] = [
 async function main() {
   console.log(`Seeding ${colleges.length} colleges...`);
 
+  console.log("Cleaning up database...");
+  await prisma.review.deleteMany({});
+  await prisma.savedCollege.deleteMany({});
+  await prisma.savedComparison.deleteMany({});
+  await prisma.placement.deleteMany({});
+  await prisma.course.deleteMany({});
+  await prisma.college.deleteMany({});
+  console.log("Database cleared.");
+
   for (const c of colleges) {
-    const college = await prisma.college.upsert({
-      where: { slug: c.slug },
-      update: {},
-      create: {
+    const college = await prisma.college.create({
+      data: {
         name: c.name,
         slug: c.slug,
         location: c.location,

@@ -97,6 +97,8 @@ export const CourseScalarFieldEnum = {
   collegeId: 'collegeId',
   name: 'name',
   duration: 'duration',
+  exam: 'exam',
+  cutoffRank: 'cutoffRank',
   fees: 'fees',
   seats: 'seats'
 } as const

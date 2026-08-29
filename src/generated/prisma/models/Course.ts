@@ -27,11 +27,13 @@ export type AggregateCourse = {
 }
 
 export type CourseAvgAggregateOutputType = {
+  cutoffRank: number | null
   fees: number | null
   seats: number | null
 }
 
 export type CourseSumAggregateOutputType = {
+  cutoffRank: number | null
   fees: number | null
   seats: number | null
 }
@@ -41,6 +43,8 @@ export type CourseMinAggregateOutputType = {
   collegeId: string | null
   name: string | null
   duration: string | null
+  exam: $Enums.Exam | null
+  cutoffRank: number | null
   fees: number | null
   seats: number | null
 }
@@ -50,6 +54,8 @@ export type CourseMaxAggregateOutputType = {
   collegeId: string | null
   name: string | null
   duration: string | null
+  exam: $Enums.Exam | null
+  cutoffRank: number | null
   fees: number | null
   seats: number | null
 }
@@ -59,6 +65,8 @@ export type CourseCountAggregateOutputType = {
   collegeId: number
   name: number
   duration: number
+  exam: number
+  cutoffRank: number
   fees: number
   seats: number
   _all: number
@@ -66,11 +74,13 @@ export type CourseCountAggregateOutputType = {
 
 
 export type CourseAvgAggregateInputType = {
+  cutoffRank?: true
   fees?: true
   seats?: true
 }
 
 export type CourseSumAggregateInputType = {
+  cutoffRank?: true
   fees?: true
   seats?: true
 }
@@ -80,6 +90,8 @@ export type CourseMinAggregateInputType = {
   collegeId?: true
   name?: true
   duration?: true
+  exam?: true
+  cutoffRank?: true
   fees?: true
   seats?: true
 }
@@ -89,6 +101,8 @@ export type CourseMaxAggregateInputType = {
   collegeId?: true
   name?: true
   duration?: true
+  exam?: true
+  cutoffRank?: true
   fees?: true
   seats?: true
 }
@@ -98,6 +112,8 @@ export type CourseCountAggregateInputType = {
   collegeId?: true
   name?: true
   duration?: true
+  exam?: true
+  cutoffRank?: true
   fees?: true
   seats?: true
   _all?: true
@@ -194,6 +210,8 @@ export type CourseGroupByOutputType = {
   collegeId: string
   name: string
   duration: string
+  exam: $Enums.Exam | null
+  cutoffRank: number | null
   fees: number
   seats: number | null
   _count: CourseCountAggregateOutputType | null
@@ -226,6 +244,8 @@ export type CourseWhereInput = {
   collegeId?: Prisma.StringFilter<"Course"> | string
   name?: Prisma.StringFilter<"Course"> | string
   duration?: Prisma.StringFilter<"Course"> | string
+  exam?: Prisma.EnumExamNullableFilter<"Course"> | $Enums.Exam | null
+  cutoffRank?: Prisma.IntNullableFilter<"Course"> | number | null
   fees?: Prisma.IntFilter<"Course"> | number
   seats?: Prisma.IntNullableFilter<"Course"> | number | null
   college?: Prisma.XOR<Prisma.CollegeScalarRelationFilter, Prisma.CollegeWhereInput>
@@ -236,6 +256,8 @@ export type CourseOrderByWithRelationInput = {
   collegeId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  exam?: Prisma.SortOrderInput | Prisma.SortOrder
+  cutoffRank?: Prisma.SortOrderInput | Prisma.SortOrder
   fees?: Prisma.SortOrder
   seats?: Prisma.SortOrderInput | Prisma.SortOrder
   college?: Prisma.CollegeOrderByWithRelationInput
@@ -249,6 +271,8 @@ export type CourseWhereUniqueInput = Prisma.AtLeast<{
   collegeId?: Prisma.StringFilter<"Course"> | string
   name?: Prisma.StringFilter<"Course"> | string
   duration?: Prisma.StringFilter<"Course"> | string
+  exam?: Prisma.EnumExamNullableFilter<"Course"> | $Enums.Exam | null
+  cutoffRank?: Prisma.IntNullableFilter<"Course"> | number | null
   fees?: Prisma.IntFilter<"Course"> | number
   seats?: Prisma.IntNullableFilter<"Course"> | number | null
   college?: Prisma.XOR<Prisma.CollegeScalarRelationFilter, Prisma.CollegeWhereInput>
@@ -259,6 +283,8 @@ export type CourseOrderByWithAggregationInput = {
   collegeId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  exam?: Prisma.SortOrderInput | Prisma.SortOrder
+  cutoffRank?: Prisma.SortOrderInput | Prisma.SortOrder
   fees?: Prisma.SortOrder
   seats?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CourseCountOrderByAggregateInput
@@ -276,6 +302,8 @@ export type CourseScalarWhereWithAggregatesInput = {
   collegeId?: Prisma.StringWithAggregatesFilter<"Course"> | string
   name?: Prisma.StringWithAggregatesFilter<"Course"> | string
   duration?: Prisma.StringWithAggregatesFilter<"Course"> | string
+  exam?: Prisma.EnumExamNullableWithAggregatesFilter<"Course"> | $Enums.Exam | null
+  cutoffRank?: Prisma.IntNullableWithAggregatesFilter<"Course"> | number | null
   fees?: Prisma.IntWithAggregatesFilter<"Course"> | number
   seats?: Prisma.IntNullableWithAggregatesFilter<"Course"> | number | null
 }
@@ -284,6 +312,8 @@ export type CourseCreateInput = {
   id?: string
   name: string
   duration: string
+  exam?: $Enums.Exam | null
+  cutoffRank?: number | null
   fees: number
   seats?: number | null
   college: Prisma.CollegeCreateNestedOneWithoutCoursesInput
@@ -294,6 +324,8 @@ export type CourseUncheckedCreateInput = {
   collegeId: string
   name: string
   duration: string
+  exam?: $Enums.Exam | null
+  cutoffRank?: number | null
   fees: number
   seats?: number | null
 }
@@ -302,6 +334,8 @@ export type CourseUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   duration?: Prisma.StringFieldUpdateOperationsInput | string
+  exam?: Prisma.NullableEnumExamFieldUpdateOperationsInput | $Enums.Exam | null
+  cutoffRank?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fees?: Prisma.IntFieldUpdateOperationsInput | number
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   college?: Prisma.CollegeUpdateOneRequiredWithoutCoursesNestedInput
@@ -312,6 +346,8 @@ export type CourseUncheckedUpdateInput = {
   collegeId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   duration?: Prisma.StringFieldUpdateOperationsInput | string
+  exam?: Prisma.NullableEnumExamFieldUpdateOperationsInput | $Enums.Exam | null
+  cutoffRank?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fees?: Prisma.IntFieldUpdateOperationsInput | number
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -321,6 +357,8 @@ export type CourseCreateManyInput = {
   collegeId: string
   name: string
   duration: string
+  exam?: $Enums.Exam | null
+  cutoffRank?: number | null
   fees: number
   seats?: number | null
 }
@@ -329,6 +367,8 @@ export type CourseUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   duration?: Prisma.StringFieldUpdateOperationsInput | string
+  exam?: Prisma.NullableEnumExamFieldUpdateOperationsInput | $Enums.Exam | null
+  cutoffRank?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fees?: Prisma.IntFieldUpdateOperationsInput | number
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -338,6 +378,8 @@ export type CourseUncheckedUpdateManyInput = {
   collegeId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   duration?: Prisma.StringFieldUpdateOperationsInput | string
+  exam?: Prisma.NullableEnumExamFieldUpdateOperationsInput | $Enums.Exam | null
+  cutoffRank?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fees?: Prisma.IntFieldUpdateOperationsInput | number
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -357,11 +399,14 @@ export type CourseCountOrderByAggregateInput = {
   collegeId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  exam?: Prisma.SortOrder
+  cutoffRank?: Prisma.SortOrder
   fees?: Prisma.SortOrder
   seats?: Prisma.SortOrder
 }
 
 export type CourseAvgOrderByAggregateInput = {
+  cutoffRank?: Prisma.SortOrder
   fees?: Prisma.SortOrder
   seats?: Prisma.SortOrder
 }
@@ -371,6 +416,8 @@ export type CourseMaxOrderByAggregateInput = {
   collegeId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  exam?: Prisma.SortOrder
+  cutoffRank?: Prisma.SortOrder
   fees?: Prisma.SortOrder
   seats?: Prisma.SortOrder
 }
@@ -380,11 +427,14 @@ export type CourseMinOrderByAggregateInput = {
   collegeId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  exam?: Prisma.SortOrder
+  cutoffRank?: Prisma.SortOrder
   fees?: Prisma.SortOrder
   seats?: Prisma.SortOrder
 }
 
 export type CourseSumOrderByAggregateInput = {
+  cutoffRank?: Prisma.SortOrder
   fees?: Prisma.SortOrder
   seats?: Prisma.SortOrder
 }
@@ -431,6 +481,10 @@ export type CourseUncheckedUpdateManyWithoutCollegeNestedInput = {
   deleteMany?: Prisma.CourseScalarWhereInput | Prisma.CourseScalarWhereInput[]
 }
 
+export type NullableEnumExamFieldUpdateOperationsInput = {
+  set?: $Enums.Exam | null
+}
+
 export type NullableIntFieldUpdateOperationsInput = {
   set?: number | null
   increment?: number
@@ -443,6 +497,8 @@ export type CourseCreateWithoutCollegeInput = {
   id?: string
   name: string
   duration: string
+  exam?: $Enums.Exam | null
+  cutoffRank?: number | null
   fees: number
   seats?: number | null
 }
@@ -451,6 +507,8 @@ export type CourseUncheckedCreateWithoutCollegeInput = {
   id?: string
   name: string
   duration: string
+  exam?: $Enums.Exam | null
+  cutoffRank?: number | null
   fees: number
   seats?: number | null
 }
@@ -489,6 +547,8 @@ export type CourseScalarWhereInput = {
   collegeId?: Prisma.StringFilter<"Course"> | string
   name?: Prisma.StringFilter<"Course"> | string
   duration?: Prisma.StringFilter<"Course"> | string
+  exam?: Prisma.EnumExamNullableFilter<"Course"> | $Enums.Exam | null
+  cutoffRank?: Prisma.IntNullableFilter<"Course"> | number | null
   fees?: Prisma.IntFilter<"Course"> | number
   seats?: Prisma.IntNullableFilter<"Course"> | number | null
 }
@@ -497,6 +557,8 @@ export type CourseCreateManyCollegeInput = {
   id?: string
   name: string
   duration: string
+  exam?: $Enums.Exam | null
+  cutoffRank?: number | null
   fees: number
   seats?: number | null
 }
@@ -505,6 +567,8 @@ export type CourseUpdateWithoutCollegeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   duration?: Prisma.StringFieldUpdateOperationsInput | string
+  exam?: Prisma.NullableEnumExamFieldUpdateOperationsInput | $Enums.Exam | null
+  cutoffRank?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fees?: Prisma.IntFieldUpdateOperationsInput | number
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -513,6 +577,8 @@ export type CourseUncheckedUpdateWithoutCollegeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   duration?: Prisma.StringFieldUpdateOperationsInput | string
+  exam?: Prisma.NullableEnumExamFieldUpdateOperationsInput | $Enums.Exam | null
+  cutoffRank?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fees?: Prisma.IntFieldUpdateOperationsInput | number
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -521,6 +587,8 @@ export type CourseUncheckedUpdateManyWithoutCollegeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   duration?: Prisma.StringFieldUpdateOperationsInput | string
+  exam?: Prisma.NullableEnumExamFieldUpdateOperationsInput | $Enums.Exam | null
+  cutoffRank?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fees?: Prisma.IntFieldUpdateOperationsInput | number
   seats?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -532,6 +600,8 @@ export type CourseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   collegeId?: boolean
   name?: boolean
   duration?: boolean
+  exam?: boolean
+  cutoffRank?: boolean
   fees?: boolean
   seats?: boolean
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
@@ -542,6 +612,8 @@ export type CourseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   collegeId?: boolean
   name?: boolean
   duration?: boolean
+  exam?: boolean
+  cutoffRank?: boolean
   fees?: boolean
   seats?: boolean
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
@@ -552,6 +624,8 @@ export type CourseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   collegeId?: boolean
   name?: boolean
   duration?: boolean
+  exam?: boolean
+  cutoffRank?: boolean
   fees?: boolean
   seats?: boolean
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
@@ -562,11 +636,13 @@ export type CourseSelectScalar = {
   collegeId?: boolean
   name?: boolean
   duration?: boolean
+  exam?: boolean
+  cutoffRank?: boolean
   fees?: boolean
   seats?: boolean
 }
 
-export type CourseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "collegeId" | "name" | "duration" | "fees" | "seats", ExtArgs["result"]["course"]>
+export type CourseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "collegeId" | "name" | "duration" | "exam" | "cutoffRank" | "fees" | "seats", ExtArgs["result"]["course"]>
 export type CourseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   college?: boolean | Prisma.CollegeDefaultArgs<ExtArgs>
 }
@@ -587,6 +663,8 @@ export type $CoursePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     collegeId: string
     name: string
     duration: string
+    exam: $Enums.Exam | null
+    cutoffRank: number | null
     fees: number
     seats: number | null
   }, ExtArgs["result"]["course"]>
@@ -1017,6 +1095,8 @@ export interface CourseFieldRefs {
   readonly collegeId: Prisma.FieldRef<"Course", 'String'>
   readonly name: Prisma.FieldRef<"Course", 'String'>
   readonly duration: Prisma.FieldRef<"Course", 'String'>
+  readonly exam: Prisma.FieldRef<"Course", 'Exam'>
+  readonly cutoffRank: Prisma.FieldRef<"Course", 'Int'>
   readonly fees: Prisma.FieldRef<"Course", 'Int'>
   readonly seats: Prisma.FieldRef<"Course", 'Int'>
 }

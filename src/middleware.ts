@@ -9,12 +9,12 @@ const PUBLIC_API_ROUTES = [
   "/api/colleges",
 ];
 
-function isPublicRoute(pathname: string): boolean {
-  if (PUBLIC_API_ROUTES.includes(pathname)) {
+function isPublicRoute(pathname: string, method: string): boolean {
+  if (pathname === "/api/auth/login" || pathname === "/api/auth/signup" || pathname === "/api/health") {
     return true;
   }
-  // Allow all college sub-routes (e.g. compare, details by slug)
-  if (pathname.startsWith("/api/colleges/")) {
+  // Allow college endpoints for GET requests only
+  if ((pathname === "/api/colleges" || pathname.startsWith("/api/colleges/")) && method === "GET") {
     return true;
   }
   return false;
@@ -24,7 +24,7 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (pathname.startsWith("/api")) {
-    if (isPublicRoute(pathname)) {
+    if (isPublicRoute(pathname, request.method)) {
       return NextResponse.next();
     }
 

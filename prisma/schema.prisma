@@ -32,15 +32,20 @@ model College {
 }
 
 model Course {
-    id        String  @id @default(cuid())
-    collegeId String
-    college   College @relation(fields: [collegeId], references: [id], onDelete: Cascade)
-    name      String
-    duration  String // "4 years"
-    fees      Int
-    seats     Int?
+    id         String  @id @default(cuid())
+    collegeId  String
+    college    College @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+    name       String
+    duration   String // "4 years"
+    exam       Exam?
+    cutoffRank Int?
+
+    fees  Int
+    seats Int?
 
     @@index([collegeId])
+    @@index([exam])
+    @@index([cutoffRank])
 }
 
 model Placement {
@@ -69,12 +74,11 @@ model Review {
 }
 
 model User {
-    id        String   @id @default(cuid())
-    email     String   @unique
-    password  String // hashed
-    name      String
-    createdAt DateTime @default(now())
-
+    id            String            @id @default(cuid())
+    email         String            @unique
+    password      String // hashed
+    name          String
+    createdAt     DateTime          @default(now())
     reviews       Review[]
     savedColleges SavedCollege[]
     comparisons   SavedComparison[]
@@ -97,4 +101,11 @@ model SavedComparison {
     user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
     collegeIds String[] // array of college IDs being compared
     createdAt  DateTime @default(now())
+}
+
+enum Exam {
+    JEE
+    NEET
+    CET
+    CUET
 }
