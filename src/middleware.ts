@@ -7,10 +7,17 @@ const PUBLIC_API_ROUTES = [
   "/api/auth/signup",
   "/api/health",
   "/api/colleges",
+  "/api"
 ];
 
 function isPublicRoute(pathname: string, method: string): boolean {
-  if (pathname === "/api/auth/login" || pathname === "/api/auth/signup" || pathname === "/api/health") {
+  if (
+    pathname === "/api/auth/login" ||
+    pathname === "/api/auth/signup" ||
+    pathname === "/api/health" ||
+    pathname === "/api" ||
+    pathname === "/api/"
+  ) {
     return true;
   }
   // Allow college endpoints for GET requests only
